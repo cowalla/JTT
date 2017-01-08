@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<script type="text/javascript" src="jquery-3.1.1.slim.js"></script>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+		<script type="text/javascript" src="frontend.js"></script>
+
+		<title>JavaScript Practice</title>
+
+	</head>
+	<body>
+
+		<div class='container-fluid'>
+
+            <!--Employee Class Form-->
+			<div class='col-md-4' id="classEntryForm">
+				<h2>Employee Class Entry</h2>
+				<div class="form-group" id="employeeClassForm">
+					<label for="employeeClass">Class Name:</label>
+					<input type="text" class="form-control" id="employeeClassInput" placeholder="Bartender, Host, etc.">
+				</div>
+				<button class="btn btn-default" id="addClassButton">Add Employee Class</button>
+			</div>
+
+            <!--Employee Name and Class Form-->
+			<div class="col-md-4">
+				<h2>Employee Name Entry</h2>
+				<label for="employeeName">Employee Name:</label>
+			    <div class="input-group">
+			      	<input type="text" class="form-control" id="employeeNameInput" placeholder="Jane Doe">
+		      		<div class="input-group-btn">
+		      			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="employeeClassDropdownLabel">Class <span class="caret"></span>
+		      			</button>
+		      			<ul id="employeeClassDropdown" class="dropdown-menu dropdown-menu-right"></ul>
+					</div>
+			    </div>
+			    <br>
+			    <button id="addEmployeeAndClassButton" class="btn btn-default">Add Employee</button>
+			</div>
+
+		</div>
+
+		<!--Employee Entry Area-->
+		<div class="container-fluid">
+            <!--Employee Class List-->
+			<div class='col-md-4' id="classListContainer">
+				<h3>Employee Classes</h3>
+				<p>click to remove</p>
+				<div class="list-group" id="classList"></div>
+			</div>
+
+            <!--Employee with Class List-->
+			<div class='col-md-4' id="employeeAndClassListContainer">
+				<h3>Employees</h3>
+				<p>click to remove</p>
+				<div class="list-group" id="employeeAndClassList"></div>
+			</div>
+		</div>
+		<br>
+
+		<!--Employee Hours Entry Area-->
+		<div class="container-fluid">
+			<div class="col-md-4">
+			    <button id="proceedToEmployeeHoursEntry" class="btn btn-default">Enter Employee Hours</button>
+			</div>
+			<div class="col-md-4">
+				<div id="employeeHoursEntry"></div>
+			</div>
+		</div>
+	</body>
+</html>

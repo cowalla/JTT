@@ -1,0 +1,8 @@
+db.sqlite3
+.idea/
+.Python
+bin/
+include/
+lib/
+pip-selfcheck.json
+*.pyc
