@@ -3,7 +3,7 @@ $(document).ready(function() {
 	var employees = []
 	var classes = []
 
-	$("#backToEmployeeEntry").on("click", function () {
+	$("#backToEmployeeEntryFromHoursEntry").on("click", function () {
 		$("#hoursEntryNav").addClass('hidden');
 		$("#employeeHoursEntryContainer").addClass('hidden');
 
@@ -11,7 +11,15 @@ $(document).ready(function() {
 		$("#employeeEntryNav").removeClass('hidden');
 	})
 
-	$("#backToHoursEntry").on("click", function () {
+	$("#backToEmployeeEntryFromRevenueEntry").on("click", function () {
+		$("#revenueEntryNav").addClass('hidden');
+		$("#revenueEntryContainer").addClass('hidden');
+
+		$("#employeeNameEntryContainer").removeClass('hidden');
+		$("#employeeEntryNav").removeClass('hidden');
+	})
+
+	$("#backToHoursEntryFromRevenueEntry").on("click", function () {
 		$("#revenueEntryNav").addClass('hidden');
 		$("#revenueEntryContainer").addClass('hidden');
 
@@ -19,7 +27,7 @@ $(document).ready(function() {
 		$("#hoursEntryNav").removeClass('hidden');
 	})
 
-	$("#proceedToRevenueEntry").on("click", function () {
+	$("#proceedToRevenueEntryFromHoursEntry").on("click", function () {
 		$("#revenueEntryNav").removeClass('hidden');
 		$("#revenueEntryContainer").removeClass('hidden');
 
@@ -27,7 +35,15 @@ $(document).ready(function() {
 		$("#hoursEntryNav").addClass('hidden');
 	})
 
-	$("#backToRevenueEntry").on("click", function () {
+	$("#proceedToRevenueEntryFromEmployeeEntry").on("click", function () {
+		$("#revenueEntryNav").removeClass('hidden');
+		$("#revenueEntryContainer").removeClass('hidden');
+
+		$("#employeeNameEntryContainer").addClass('hidden');
+		$("#employeeEntryNav").addClass('hidden');
+	})
+
+	$("#backToRevenueEntryFromPoolResults").on("click", function () {
 		$("#poolResultsNav").addClass('hidden');
 		$("#poolResultsContainer").addClass('hidden');
 
@@ -209,8 +225,56 @@ $(document).ready(function() {
 	  return parseFloat(string.replace(',', '.'));
 	}
 
-	$("#submitForm").on("click", function () {
+	$("#submitFormEven").on("click", function () {
+		/*
+		Perform the final calculation and display the results
+		*/
+		$("#revenueEntryNav").addClass('hidden');
+		$("#revenueEntryContainer").addClass('hidden');
 
+		$("#poolResultsContainer").removeClass('hidden');
+		$("#poolResultsNav").removeClass('hidden');
+
+		var creditRevenue = float($("#tipRevenueCredit").val());
+		var cashRevenue = float($("#tipRevenueCash").val());
+		var totalRevenue = creditRevenue + cashRevenue;
+
+		var totalPayment = totalRevenue / employees.length
+		var cashPayment = cashRevenue / employees.length
+		var creditPayment = creditRevenue / employees.length
+
+		$("#reportTable").empty();
+
+		for ( i=0 ; i<employees.length ; i++ ) {
+
+			var row = jQuery("<tr></tr>", {});
+			var nameEntry = jQuery("<th></th>", {
+				text: employees[i],
+			})
+			var creditEntry = jQuery("<th></th>", {
+				text: "$"+parseFloat(creditPayment.toString()).toFixed(2)
+			})
+			var cashEntry = jQuery("<th></th>", {
+				text: "$"+parseFloat(cashPayment.toString()).toFixed(2)
+			})
+			var totalEntry = jQuery("<th></th>", {
+				text: "$"+parseFloat(totalPayment.toString()).toFixed(2)
+			})
+
+			nameEntry.appendTo(row);
+			cashEntry.appendTo(row);
+			creditEntry.appendTo(row);
+			totalEntry.appendTo(row);
+			row.appendTo($("#reportTable"))
+
+		}
+	});
+
+	
+	$("#submitFormHours").on("click", function () {
+		/*
+		Perform the final calculation and display the results
+		*/
 		$("#revenueEntryNav").addClass('hidden');
 		$("#revenueEntryContainer").addClass('hidden');
 

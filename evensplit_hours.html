@@ -18,8 +18,8 @@
 
 		<title>JustTheTip</title>
 
-	</head>
-	<body>
+    </head>
+    <body>
         <nav class="navbar-collapse">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -33,7 +33,7 @@
 
         <div class='container-fluid' id="pageName">
             <div class="col-md-12" align="center">
-            <h2>Even Split</h2>
+            <h2>Time-Based Split</h2>
             </div>
         </div>
 
@@ -57,7 +57,24 @@
 
         <div class="container-fluid" id="employeeEntryNav">
             <div class='col-md-12' align="center">
-                <button id="proceedToRevenueEntryFromEmployeeEntry" class="btn btn-default">Enter Tips <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button>
+                <button id="proceedToEmployeeHoursEntry" class="btn btn-default">Enter Hours <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button>
+            </div>
+        </div>
+
+        <div class="container-fluid hidden" id="employeeHoursEntryContainer">
+            <h3>Step 2: Enter Hours <span class="glyphicon glyphicon-time" aria-hidden="true"></span></h3>
+            <!--Employee Hours Entry-->
+			<div class="col-md-12">
+                <label for="employeeHoursEntry">Enter the number of hours worked by each employee:</label>
+				<div id="employeeHoursEntry"></div>
+			</div>
+        </div>
+        <br>
+
+        <div class="container-fluid hidden" id="hoursEntryNav">
+            <div class='col-md-12' align="center">
+                <button id="backToEmployeeEntryFromHoursEntry" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Add Employees</button>
+                <button id="proceedToRevenueEntryFromHoursEntry" class="btn btn-default">Enter Tips <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button>
             </div>
         </div>
 
@@ -83,8 +100,8 @@
 
         <div class="container-fluid hidden" id="revenueEntryNav">
             <div class='col-md-12' align="center">
-                <button id="backToEmployeeEntryFromRevenueEntry" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Enter Employees </button>
-                <button id="submitFormEven" class="btn btn-default">Finished <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button>
+                <button id="backToHoursEntryFromRevenueEntry" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Enter Tips </button>
+                <button id="submitFormHours" class="btn btn-default">Finished <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button>
             </div>
         </div>
 
