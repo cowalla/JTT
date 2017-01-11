@@ -27,6 +27,22 @@ $(document).ready(function() {
 		$("#hoursEntryNav").removeClass('hidden');
 	})
 
+	$("#backToSupportStaffEntryFromEmployeeNameEntry").on("click", function () {
+		$("#employeeEntryNav").addClass('hidden');
+		$("#employeeNameEntryContainer").addClass('hidden');
+
+		$("#supportStaffEntryContainer").removeClass('hidden');
+		$("#supportStaffEntryNav").removeClass('hidden');
+	})
+
+	$("#proceedToEmployeeEntryFromSupportStaffEntry").on("click", function () {
+		$("#employeeEntryNav").removeClass('hidden');
+		$("#employeeNameEntryContainer").removeClass('hidden');
+
+		$("#supportStaffEntryContainer").addClass('hidden');
+		$("#supportStaffEntryNav").addClass('hidden');
+	})
+
 	$("#proceedToRevenueEntryFromHoursEntry").on("click", function () {
 		$("#revenueEntryNav").removeClass('hidden');
 		$("#revenueEntryContainer").removeClass('hidden');
@@ -69,6 +85,58 @@ $(document).ready(function() {
 				$("#employeeNameInput").val("")
 				employees.push(newEmployee)
 			}
+		}
+	});
+
+	var Support = function(name, percentage) {
+		this.name = name;
+		this.percentage = percentage;
+	}
+
+	var supportList = []
+	$( "#addSupportStaffButton" ).on("click", function() {
+		/*
+		Add a new employee.
+		*/
+		var newSupportName = $("#supportStaffNameInput").val();
+		var newSupportPercentage = $("#supportStaffPercentage").val();
+		var thisSupport = (newSupportName, newSupportPercentage)
+
+		if (newSupportPercentage.length < 1) {
+			// prevent duplicate employees
+			// why the double negative?
+		} else {
+			if (thisSupport.name != "") {
+				var newSpan = jQuery('<span></span>', {
+					class: "badge",
+					text: newSupportPercentage
+				})
+				var newItem = jQuery('<a/>', {
+					class: "list-group-item",
+				    text: newSupportName
+				})
+				newSpan.appendTo(newItem)
+				newItem.appendTo('#supportStaffList')
+				$("#supportStaffNameInput").val("")
+				supportList.push(thisSupport)
+			}
+		}
+	});
+
+	$( "#supportStaffList" ).on( "click", 'a', function() {
+		/*
+		Remove the clicked employee from the list of employees
+		*/
+
+	    var removedPercentage = $(this).find('span').text()
+	    var removedSupport = $(this).text()
+
+	    // remove the class from both lists
+	    $( this ).remove()
+
+	    var index = supportList.indexOf((removedSupport, removedPercentage))
+	    if (index > -1) {
+		    supportList.splice(index, 1);
 		}
 	});
 
@@ -270,7 +338,7 @@ $(document).ready(function() {
 		}
 	});
 
-	
+
 	$("#submitFormHours").on("click", function () {
 		/*
 		Perform the final calculation and display the results
@@ -302,6 +370,103 @@ $(document).ready(function() {
 			var totalPayment = (totalRevenue / totalHours) * hours[i]
 			var cashPayment = (cashRevenue / totalHours) * hours[i]
 			var creditPayment = (creditRevenue / totalHours) * hours[i]
+
+			var row = jQuery("<tr></tr>", {});
+			var nameEntry = jQuery("<th></th>", {
+				text: employees[i],
+			})
+			var creditEntry = jQuery("<th></th>", {
+				text: "$"+parseFloat(creditPayment.toString()).toFixed(2)
+			})
+			var cashEntry = jQuery("<th></th>", {
+				text: "$"+parseFloat(cashPayment.toString()).toFixed(2)
+			})
+			var totalEntry = jQuery("<th></th>", {
+				text: "$"+parseFloat(totalPayment.toString()).toFixed(2)
+			})
+
+			nameEntry.appendTo(row);
+			cashEntry.appendTo(row);
+			creditEntry.appendTo(row);
+			totalEntry.appendTo(row);
+			row.appendTo($("#reportTable"))
+
+		}
+	});
+
+	$("#submitFormHoursSupport").on("click", function () {
+		/*
+		Perform the final calculation and display the results
+		*/
+		$("#revenueEntryNav").addClass('hidden');
+		$("#revenueEntryContainer").addClass('hidden');
+
+		$("#poolResultsContainer").removeClass('hidden');
+		$("#poolResultsNav").removeClass('hidden');
+
+		var creditRevenue = float($("#tipRevenueCredit").val());
+		var cashRevenue = float($("#tipRevenueCash").val());
+		var totalRevenue = creditRevenue + cashRevenue;
+
+		var employees = [];
+		var supportStaff = [];
+		var totalSupportPercentage = 0.0;
+		var hours = [];
+		var totalHours = 0.0;
+
+		$("#employeeHoursEntry div").each( function () {
+			employees.push($(this).find("span").text())
+			hours.push(float($(this).find("input").val()))
+
+			totalHours = totalHours + float($(this).find("input").val())
+		})
+
+		$("#supportStaffList a").each( function () {
+			var supportPercentage = float($(this).find("span").text());
+			var supportName = $(this).text();
+
+			supportStaff.push(new Support(supportName, supportPercentage))
+
+			totalSupportPercentage += (supportPercentage)
+			console.log(supportStaff)
+		})
+
+		var nonSupportPercentage = 1 - totalSupportPercentage / 100.0
+
+		$("#reportTable").empty();
+
+		for ( i=0 ; i < supportStaff.length ; i ++ ) {
+
+			var totalPayment = totalRevenue * supportStaff[i].percentage / 100.0
+			var cashPayment = cashRevenue * supportStaff[i].percentage / 100.0
+			var creditPayment = creditRevenue * supportStaff[i].percentage / 100.0
+
+
+			var row = jQuery("<tr></tr>", {});
+			var nameEntry = jQuery("<th></th>", {
+				text: supportStaff[i].name,
+			})
+			var creditEntry = jQuery("<th></th>", {
+				text: "$"+parseFloat(creditPayment.toString()).toFixed(2)
+			})
+			var cashEntry = jQuery("<th></th>", {
+				text: "$"+parseFloat(cashPayment.toString()).toFixed(2)
+			})
+			var totalEntry = jQuery("<th></th>", {
+				text: "$"+parseFloat(totalPayment.toString()).toFixed(2)
+			})
+
+			nameEntry.appendTo(row);
+			cashEntry.appendTo(row);
+			creditEntry.appendTo(row);
+			totalEntry.appendTo(row);
+			row.appendTo($("#reportTable"))
+		}
+
+		for ( i=0 ; i<employees.length ; i++ ) {
+			var totalPayment = (nonSupportPercentage * totalRevenue / totalHours) * hours[i]
+			var cashPayment = (nonSupportPercentage * cashRevenue / totalHours) * hours[i]
+			var creditPayment = (nonSupportPercentage * creditRevenue / totalHours) * hours[i]
 
 			var row = jQuery("<tr></tr>", {});
 			var nameEntry = jQuery("<th></th>", {

@@ -1,29 +1,29 @@
-<!DOCTYPE html>
+        <!DOCTYPE html>
 
 <html>
-	<head>
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=320, height=device-height, target-densitydpi=medium-dpi" />
+    <head>
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=320, height=device-height"/>
 
-		<script type="text/javascript" src="jquery-3.1.1.slim.js"></script>
-		<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <script type="text/javascript" src="jquery-3.1.1.slim.js"></script>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-		<!-- Optional theme -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
-		<!-- Latest compiled and minified JavaScript -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-		<script type="text/javascript" src="frontend.js"></script>
+        <script type="text/javascript" src="frontend.js"></script>
 
-		<title>JustTheTip</title>
+        <title>JustTheTip</title>
 
-	</head>
-	<body>
+    </head>
+    <body>
         <nav class="navbar-collapse">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand" href="index.html">
                         <span class="glyphicon glyphicon-fire" aria-hidden="true"></span>
                          Just The Tip
                     </a>
@@ -33,48 +33,74 @@
 
         <div class='container-fluid' id="pageName">
             <div class="col-md-12" align="center">
-            <h2>Even Split</h2>
+            <h2>Time-Based Split</h2>
             </div>
         </div>
 
-        <div class='container-fluid' id="employeeNameEntryContainer">
-            <h3>Step 1: Add Employees <span class="glyphicon glyphicon-user" aria-hidden="true"></span></h3>
+        <div class='container-fluid' id="supportStaffEntryContainer">
+            <h3>Step 1: Add Support Staff <span class="glyphicon glyphicon-user" aria-hidden="true"></span></h3>
 
             <!--Employee Name Form-->
-			<div class="col-md-12">
-				<label for="employeeNameInput">Employee Name:</label>
-			    <div class="input-group input-group-md">
-			      	<input type="text" class="form-control" id="employeeNameInput" placeholder="Jane Doe">
+            <div class="col-md-12">
+                <label for="supportStaffNameInput">Support Staff Name:</label>
+                <div class="input-group input-group-md">
+                    <input type="text" class="form-control" id="supportStaffNameInput" placeholder="Jane Doe">
+                    <input type="number" step="1.0" class="form-control" id="supportStaffPercentage" placeholder="Tip Percentage (1-99%)">
+                </div>
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" id="addSupportStaffButton" type="button">Add Support Staff</button>
+                    </span>
+                <br>
+                <label for="supportStaffList">Support Staff (click to remove)</label>
+                <div class="list-group" id="supportStaffList"></div>
+            </div>
+        </div>
+
+        <div class="container-fluid" id="supportStaffEntryNav">
+            <div class='col-md-12' align="center">
+                <button id="proceedToEmployeeEntryFromSupportStaffEntry" class="btn btn-default">Add Employees <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button>
+            </div>
+        </div>
+
+        <div class='container-fluid hidden' id="employeeNameEntryContainer">
+            <h3>Step 2: Add Employees <span class="glyphicon glyphicon-user" aria-hidden="true"></span></h3>
+
+            <!--Employee Name Form-->
+            <div class="col-md-12">
+                <label for="employeeNameInput">Employee Name:</label>
+                <div class="input-group input-group-md">
+                    <input type="text" class="form-control" id="employeeNameInput" placeholder="Jane Doe">
                     <span class="input-group-btn">
                         <button class="btn btn-default" id="addEmployeeButton" type="button">Add Employee</button>
                     </span>
-			    </div>
+                </div>
                 <br>
                 <label for="employeeAndClassList">Employee List (click to remove)</label>
-				<div class="list-group" id="employeeAndClassList"></div>
-			</div>
+                <div class="list-group" id="employeeAndClassList"></div>
+            </div>
         </div>
 
-        <div class="container-fluid" id="employeeEntryNav">
+        <div class="container-fluid hidden" id="employeeEntryNav">
             <div class='col-md-12' align="center">
+                <button id="backToSupportStaffEntryFromEmployeeNameEntry" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Add Support Staff</button>
                 <button id="proceedToEmployeeHoursEntry" class="btn btn-default">Enter Hours <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button>
             </div>
         </div>
 
         <div class="container-fluid hidden" id="employeeHoursEntryContainer">
-            <h3>Step 2: Enter Hours <span class="glyphicon glyphicon-time" aria-hidden="true"></span></h3>
+            <h3>Step 3: Enter Hours <span class="glyphicon glyphicon-time" aria-hidden="true"></span></h3>
             <!--Employee Hours Entry-->
-			<div class="col-md-12">
+            <div class="col-md-12">
                 <label for="employeeHoursEntry">Enter the number of hours worked by each employee:</label>
-				<div id="employeeHoursEntry"></div>
-			</div>
+                <div id="employeeHoursEntry"></div>
+            </div>
         </div>
         <br>
 
         <div class="container-fluid hidden" id="hoursEntryNav">
             <div class='col-md-12' align="center">
-                <button id="backToEmployeeEntry" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Add Employees</button>
-                <button id="proceedToRevenueEntry" class="btn btn-default">Enter Tips <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button>
+                <button id="backToEmployeeEntryFromHoursEntry" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Add Employees</button>
+                <button id="proceedToRevenueEntryFromHoursEntry" class="btn btn-default">Enter Tips <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button>
             </div>
         </div>
 
@@ -95,13 +121,13 @@
                     <input type="number" step="0.01" class="form-control" aria-label="Cash Tip Revenue" id="tipRevenueCash" placeholder="123.45">
                 </div>
                 <br>
-			</div>
-		</div>
+            </div>
+        </div>
 
         <div class="container-fluid hidden" id="revenueEntryNav">
             <div class='col-md-12' align="center">
-                <button id="backToHoursEntry" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Enter Tips </button>
-                <button id="submitForm" class="btn btn-default">Finished <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button>
+                <button id="backToHoursEntryFromRevenueEntry" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Enter Tips </button>
+                <button id="submitFormHoursSupport" class="btn btn-default">Finished <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button>
             </div>
         </div>
 
@@ -124,7 +150,7 @@
 
         <div class="container-fluid hidden" id="poolResultsNav">
             <div class='col-md-12' align="center">
-                <button id="backToRevenueEntry" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Back to Time Entry</button>
+                <button id="backToRevenueEntryFromPoolResults" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Back to Time Entry</button>
             </div>
         </div>
         <div class="container-fluid">
